@@ -1,0 +1,445 @@
+[01-Apr-2025 12:13:38 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:13:38 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:13:38 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:13:38 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:14:35 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:14:35 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:14:35 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:14:35 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:18:42 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:18:42 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:18:42 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:18:42 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:19:11 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:19:11 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:19:11 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:19:11 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 12:25:05 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:25:05 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 352
+[01-Apr-2025 12:25:05 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:352
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(352): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 352
+[01-Apr-2025 12:31:05 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 18:01:14 Asia/Kolkata] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 352
+[01-Apr-2025 18:01:14 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:352
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(352): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 352
+[01-Apr-2025 12:33:39 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:33:39 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:33:39 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:33:39 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:35:38 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:35:38 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:35:38 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:35:38 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:41:08 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:41:08 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:41:08 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:41:08 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:41:28 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:41:28 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:41:28 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:41:28 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:43:32 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:43:32 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:43:32 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:43:32 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:47:02 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:47:02 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:47:02 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:47:02 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:47:57 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:47:57 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:47:57 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:47:57 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:48:51 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:48:51 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:48:51 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:48:51 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:354
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(354): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 354
+[01-Apr-2025 12:50:16 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:50:16 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:50:16 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:50:16 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:55:01 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:55:01 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:55:01 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:55:01 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:55:57 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:55:57 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:55:57 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:55:57 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:57:56 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 12:57:56 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:57:56 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 12:57:56 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:09:11 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 13:09:11 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:09:11 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:19:46 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 13:19:46 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:19:46 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:19:46 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:20:56 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 18:51:40 Asia/Kolkata] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 18:51:40 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:24:34 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:24:34 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:24:34 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:24:54 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:24:54 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:24:54 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:355
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(355): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 355
+[01-Apr-2025 13:40:37 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 19:10:53 Asia/Kolkata] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 19:10:53 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 13:54:22 UTC] PHP Parse error:  syntax error, unexpected double-quoted string ";", expecting "," or ";" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 184
+[01-Apr-2025 13:56:50 UTC] PHP Parse error:  syntax error, unexpected double-quoted string ";", expecting "," or ";" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 184
+[01-Apr-2025 13:56:53 UTC] PHP Parse error:  syntax error, unexpected double-quoted string ";", expecting "," or ";" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 184
+[01-Apr-2025 13:59:41 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 13:59:41 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 13:59:41 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 13:59:41 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:00:06 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 19:30:20 Asia/Kolkata] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 19:30:20 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:01:36 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:01:36 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:01:36 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:01:59 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:01:59 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:04:21 UTC] PHP Warning:  Undefined variable $LX in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 213
+[01-Apr-2025 14:04:21 UTC] PHP Warning:  Undefined variable $LY in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 213
+[01-Apr-2025 14:04:21 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:04:21 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:04:21 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:06:16 UTC] PHP Warning:  Undefined variable $LX in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 213
+[01-Apr-2025 14:06:16 UTC] PHP Warning:  Undefined variable $LY in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 213
+[01-Apr-2025 14:06:16 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:06:16 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:06:16 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:06:36 UTC] PHP Warning:  Undefined variable $LX in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 213
+[01-Apr-2025 14:06:36 UTC] PHP Warning:  Undefined variable $LY in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 213
+[01-Apr-2025 14:06:36 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:06:36 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:06:36 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:10:31 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:10:31 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:13:20 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:13:20 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:13:20 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:13:42 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:13:42 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:17:12 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 19:47:22 Asia/Kolkata] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 19:47:22 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:351
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(351): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 351
+[01-Apr-2025 14:23:54 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 19:54:02 Asia/Kolkata] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 19:54:02 Asia/Kolkata] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:350
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(350): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:27:07 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 14:27:07 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:27:07 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:27:07 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:350
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(350): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:28:12 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:28:12 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:28:12 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:350
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(350): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:36:47 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 14:36:47 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:36:47 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:36:47 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:350
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(350): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 350
+[01-Apr-2025 14:43:10 UTC] PHP Parse error:  syntax error, unexpected token "else" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 349
+[01-Apr-2025 14:46:17 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[01-Apr-2025 14:48:18 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[01-Apr-2025 14:48:18 UTC] PHP Warning:  Undefined array key "NewPwd" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[01-Apr-2025 14:48:18 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:212
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(212): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[01-Apr-2025 15:02:17 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli_result could not be converted to string in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:299
+Stack trace:
+#0 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 299
+[01-Apr-2025 15:05:06 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli_result could not be converted to string in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:299
+Stack trace:
+#0 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 299
+[02-Apr-2025 05:30:48 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 05:31:19 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 06:49:51 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 06:49:51 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:366
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(366): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 06:51:26 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 06:51:26 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:366
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(366): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 07:04:49 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 07:04:49 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:366
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(366): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 07:08:34 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 07:08:34 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:366
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(366): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 366
+[02-Apr-2025 07:12:08 UTC] PHP Warning:  Undefined variable $conn in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 367
+[02-Apr-2025 07:12:08 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_real_escape_string(): Argument #1 ($mysql) must be of type mysqli, null given in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:367
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(367): mysqli_real_escape_string()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 367
+[02-Apr-2025 07:14:39 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:418
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(418): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 418
+[02-Apr-2025 07:21:09 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 07:23:03 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:420
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(420): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 420
+[02-Apr-2025 07:23:28 UTC] PHP Warning:  Undefined array key "LX" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 07:23:28 UTC] PHP Warning:  Undefined array key "LY" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 07:23:28 UTC] PHP Warning:  Undefined array key "LZ" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 07:34:06 UTC] PHP Fatal error:  Uncaught Error: mysqli_result object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:356
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(356): mysqli_free_result()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 356
+[02-Apr-2025 07:35:34 UTC] PHP Fatal error:  Uncaught Error: mysqli_result object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:356
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(356): mysqli_free_result()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 356
+[02-Apr-2025 07:37:52 UTC] PHP Fatal error:  Uncaught Error: mysqli_result object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:356
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(356): mysqli_free_result()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 356
+[02-Apr-2025 11:32:55 UTC] PHP Warning:  Undefined variable $row in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 234
+[02-Apr-2025 11:32:55 UTC] PHP Warning:  Trying to access array offset on null in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 234
+[02-Apr-2025 17:02:55 Asia/Kolkata] PHP Warning:  Undefined variable $Email in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 252
+[02-Apr-2025 11:37:47 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 11:44:01 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:420
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(420): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 420
+[02-Apr-2025 11:44:24 UTC] PHP Warning:  Undefined array key "LX" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 11:44:24 UTC] PHP Warning:  Undefined array key "LY" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 11:44:24 UTC] PHP Warning:  Undefined array key "LZ" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 11:58:59 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 12:06:03 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 12:08:20 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:420
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(420): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 420
+[02-Apr-2025 12:08:41 UTC] PHP Warning:  Undefined array key "LX" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 12:08:41 UTC] PHP Warning:  Undefined array key "LY" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 12:08:41 UTC] PHP Warning:  Undefined array key "LZ" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 212
+[02-Apr-2025 12:27:22 UTC] PHP Warning:  Undefined variable $row in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 234
+[02-Apr-2025 12:27:22 UTC] PHP Warning:  Trying to access array offset on null in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 234
+[02-Apr-2025 17:57:22 Asia/Kolkata] PHP Warning:  Undefined variable $Email in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 252
+[02-Apr-2025 12:51:39 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:394
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(394): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 394
+[02-Apr-2025 12:51:40 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:394
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(394): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 394
+[02-Apr-2025 12:51:59 UTC] PHP Warning:  Undefined array key "LX" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 199
+[02-Apr-2025 12:51:59 UTC] PHP Warning:  Undefined array key "LY" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 199
+[02-Apr-2025 12:51:59 UTC] PHP Warning:  Undefined array key "LZ" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 199
+[02-Apr-2025 12:57:00 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 12:58:21 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:394
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(394): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 394
+[02-Apr-2025 13:02:32 UTC] PHP Warning:  Undefined array key "LX" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 199
+[02-Apr-2025 13:02:32 UTC] PHP Warning:  Undefined array key "LY" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 199
+[02-Apr-2025 13:02:32 UTC] PHP Warning:  Undefined array key "LZ" in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 199
+[02-Apr-2025 13:04:53 UTC] PHP Warning:  Undefined variable $row in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 219
+[02-Apr-2025 13:04:53 UTC] PHP Warning:  Trying to access array offset on null in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 219
+[02-Apr-2025 18:34:53 Asia/Kolkata] PHP Warning:  Undefined variable $Email in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 237
+[02-Apr-2025 13:06:37 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:394
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(394): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 394
+[02-Apr-2025 13:15:46 UTC] PHP Warning:  Undefined variable $row in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 219
+[02-Apr-2025 13:15:46 UTC] PHP Warning:  Trying to access array offset on null in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 219
+[02-Apr-2025 18:45:46 Asia/Kolkata] PHP Warning:  Undefined variable $Email in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 237
+[02-Apr-2025 13:16:52 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php:400
+Stack trace:
+#0 /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php(400): mysqli_close()
+#1 {main}
+  thrown in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 400
+[02-Apr-2025 13:23:11 UTC] PHP Warning:  Undefined variable $row in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 219
+[02-Apr-2025 13:23:11 UTC] PHP Warning:  Trying to access array offset on null in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 219
+[02-Apr-2025 18:53:11 Asia/Kolkata] PHP Warning:  Undefined variable $Email in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 237
+[02-Apr-2025 13:48:53 UTC] PHP Warning:  Undefined variable $Organiztion in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 86
+[02-Apr-2025 19:21:42 Asia/Kolkata] PHP Warning:  Undefined variable $Email in /home/xdv10fno5aob/public_html/AccuPan/Trial/index.php on line 238

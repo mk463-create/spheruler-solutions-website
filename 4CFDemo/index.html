@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   Spheruler - Object view
+  </title>
+  <meta charset="utf-8">
+  <meta name='author' content='Karthikeyan T' >
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <style>
+   body
+   {
+    background-image: linear-gradient(#FF9933,#000080,#138808); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;
+   }
+   p.sansserif { font-family: Arial, Helvetica, sans-serif; } 
+   .content { max-width: 1000px; padding: 10px; margin: auto; background: white; text-align: middle; }
+  </style>
+ </head>
+ <body>
+  <div id='DemoContent_Id'>
+   <a href='https://www.spherulersolutions.com'> <img src='Images/Logo.png' width='20' height='20'> </a> &nbsp;  <select id='Language_Id' onchange='SelectLang()'>
+   <option value='ENG' selected>English</option>
+   <option value='TAM'>தமிழ்</option>
+   <option value='HIN'>हिन्दी</option>
+  </select>
+  &nbsp;
+  <select id='Obj_Id' onchange='SelectImg()'>
+   <option id='Globe' value='1' selected > Globe </option>
+   <option id='Cube' value='2'> Cube </option>
+   <option id='Cylinder' value='3'> Cylinder </option>
+   <option id='Cone' value='4'> Cone </option>
+   <option id='Tetrahedron' value='5'> Tetrahedron </option>
+   <option id='Octahedron' value='6'> Octahedron </option>
+   <option id='Dodecahedron' value='7'> Dodecahedron </option>
+   <option id='Icosahedron' value='8'> Icosahedron </option>
+  </select> <br>
+  
+  <canvas id='Output' width='160' height='180' style="border:2px solid #000000;">  </canvas> <br>
+		
+  <input type=image id='3DView_Initial_Position_Id' width='24' height='24'bsrc='Images/Buttons/Initial.png' onclick=InitialView() title='Initial Position'>  
+  <input type=image id='Rotate_Id' width='24' height='24' src='Images/Buttons/Rightward.png' onclick=RotateView() title='Rotate Mode'> 
+  <input type=image id='Displace_Id' width='24' height='24' src='Images/Buttons/RightMove.png' onclick=DisplaceView() title='Displace Mode'> 
+  <input type=image id='FreeDraw_Id' width='24' height='24' src='Images/Buttons/FreeDraw.png' onclick=FreeHandEdit() title='Free Hand Draw'> 
+  <input type=image id='TextWrite_Id' width='24' height='24' src='Images/Buttons/Text.png' onclick=TextDrawEdit() title='Text Write'> 
+  <input type=image id='Embed_Id' width='24' height='24'src='Images/Buttons/Embed.png' onclick=EmbedEdit() title="Embed Changes"> 
+ 
+  <img name='InputImg_Name' id='InputImg_Id' width='24' height='24' src='Images/Encoded_Images/1Globe.png' onclick=FCFImage() title='FZF Image' > &nbsp;
+  <input type=image id='FullScreen_Id' width='24' height='24' src='Images/Buttons/FullScreen.png' onclick=FullScreen() title='Full Screen'>
+  <br>
+		
+  <select id='Pen_Thick_Id' title='Line Thickness'> 
+   <option value='1'> 1 px </option>
+   <option value='2'> 2 px </option>
+   <option value='3'> 3 px </option>
+   <option value='4'> 4 px </option>
+  </select> &nbsp;
+  <input type='color' id='FavColor_Id' value='#ff0000' onchange=ColorTextLine() title='Text/Line Color Pick'> &nbsp;
+  <select id='Font_Size_Id' title='Font Size'> 
+   <option value='10px Arial'> 10 </option>
+   <option value='12px Arial'> 12 </option>
+   <option value='14px Arial'> 14 </option>
+   <option value='16px Arial'> 16 </option>
+			<option value='18px Arial'> 18 </option>
+   <option value='20px Arial'> 20 </option>
+  </select> &nbsp;
+		
+  <input id='Text_Content_Id' value=' ' placeholder='Type Text' size='6' > <br>
+  <!--<textarea  id="debug" name="debug" rows="2" cols="30"> Test </textarea>  -->
+  </div>
+
+  <script>
+      var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame|| function(f){return setTimeout(f, 1000/60)};
+      var FullScrElem=document.getElementById('DemoContent_Id');
+      
+         var Enc_Cir_Rad=250;
+      var Enc_Img_Width=4*Enc_Cir_Rad, Enc_Img_Height=Enc_Img_Width;
+      var Enc_Img_Width_Prev=0;
+      var FCF_Image=new Image();
+   var Can_Inp=document.createElement('canvas');
+      var Ctx_Inp=Can_Inp.getContext('2d');
+   Can_Inp.width=Enc_Img_Width; 
+   Can_Inp.height=Enc_Img_Height;
+      var ImgData_Inp=[], Pix_Inp=[];
+      var FCFI_Chk;
+      var Kind;
+      var X_Inp=[], Y_Inp=[], Z_Inp=[], D_Inp=[];
+      var Mark_Len;
+      var Mark_Chk=false; 
+      var Marker_Text="";
+   
+         var Out_Img_Width=document.getElementById('Output').width;
+   var Out_Img_Win_Height=document.getElementById('Output').height;
+      Out_Img_Width=window.innerWidth-20;
+      Out_Img_Win_Height=window.innerHeight-150;
+       var Bot_Leg_Height=20;
+      var Out_Img_Height=Out_Img_Win_Height-Bot_Leg_Height;
+      var Can_Out=document.getElementById('Output'); 
+   var Ctx_Out=Can_Out.getContext('2d',{alpha:false}); 
+      var ImgData_Out=[]; var Pix_Out=[];
+      var Pix_Out_Store=[];
+      var Out_Img_Siz_Def;
+      var Out_Img_Siz_Prev;
+      var Reso_Dist_Min=[];
+      var Canv_Bor_Allow=10;
+   
+         var Anim_Play=true; 
+   var Anim_Play_Temp=true;
+      var UserMode=1;
+      var ViewModeOpt=1;
+      var RotMode=4;
+      var DispMode=1;
+   var ViewScrollCloser=true;
+      var MouseDown_Status=false, MouseMoved_Status=false, MouseTouch_OnObject=false;
+      var Touch1_Status=false, Touch1Moved_Status=false, Touch2_Status=false, Touch2Moved_Status=false, FullScreenOn=false, Touch2_OnObject=false;
+   
+         var PI=3.1415927;
+      var Rot_Ang=PI/180, Rot_Ang_Tmp=PI/180;
+      var Rot_Axis_x, Rot_Axis_y, Rot_Axis_z;
+      var Shft_Net_y=0, Shft_Net_z=0;
+   var Shft_Net_y_tmp, Shft_Net_z_tmp;
+         var MouseTouch_Start_Row, MouseTouch_Start_Col;
+   var MouseTouch_Move_Row, MouseTouch_Move_Col;
+			   var MouseTouch_Start_Hor, MouseTouch_Start_Ver;
+      var MouseTouch_Move_Hor, MouseTouch_Move_Ver;
+      var Stroke_Start_Col, Stroke_Row;
+      var P1_Hor,P1_Ver,P2_Hor,P2_Ver;
+   var Touch2_Start_x;
+         
+         var Qp0=1.0; var Qp1=0.0; var Qp2=0.0; var Qp3=0.0;
+      var Qtp0; var Qtp1; var Qtp2; var Qtp3;
+      var Nx; var Ny; var Nz;
+   var T1x; var T1y; var T1z;
+   var T2x; var T2y; var T2z;
+      var Mag=1.0; var View_Dist=100.0;
+      var MouseTouch_Start_x; var MouseTouch_Start_y;var MouseTouch_Start_z;
+         var Zoom_Pt_Col; var Zoom_Pt_Row;
+         var Mag_Mul, MagT;
+   
+   var Touch1StartTime;
+   
+         var ColByteOffset;
+      var Col_Left_Cir=[]; var Col_Right_Cir=[];
+      var Ind_Inp_Right=[]; var Ind_Inp_Top=[];
+   var Ind_Inp_Left=[]; var Ind_Inp_Bottom=[];
+   
+      window.onload=function()
+   {			
+    SelectInputObject_Check_Render(1);         window.addEventListener('resize', ResizeRender);
+
+    Can_Out.addEventListener('mousedown',MouseDown);
+    Can_Out.addEventListener('mousemove',MouseMove);
+    Can_Out.addEventListener('mouseup',MouseUp);
+    Can_Out.addEventListener('mouseout',MouseOut);
+			
+    Can_Out.addEventListener('dblclick', DoubleClickFunction);
+    Can_Out.addEventListener('wheel', Scroll,false);
+				
+    
+    Can_Out.addEventListener('touchstart',TouchStart);
+    Can_Out.addEventListener('touchmove', TouchMove);
+    Can_Out.addEventListener('touchend',TouchEnd);
+   }
+			
+            function SelectInputObject_Check_Render(Image_No) 
+   {
+    switch(Image_No)     {
+     case 1: document.InputImg_Name.src='Images/Encoded_Images/1Globe.png'; break;
+     case 2: document.InputImg_Name.src='Images/Encoded_Images/2Cube.png'; break;
+     case 3: document.InputImg_Name.src='Images/Encoded_Images/3Cylinder.png'; break;
+     case 4: document.InputImg_Name.src='Images/Encoded_Images/4Cone.png'; break;
+     case 5: document.InputImg_Name.src='Images/Encoded_Images/5Tetrahedron.png'; break;
+     case 6: document.InputImg_Name.src='Images/Encoded_Images/6Octahedron.png'; break;
+     case 7: document.InputImg_Name.src='Images/Encoded_Images/7Dodecahedron.png'; break;
+     case 8: document.InputImg_Name.src='Images/Encoded_Images/8Icosahedron.png'; break;
+    }
+    FCF_Image.src=document.InputImg_Name.src;
+    InputImg_Name.onload=function()     {
+     Enc_Img_Width=InputImg_Name.naturalWidth;
+     Enc_Img_Height=InputImg_Name.naturalHeight;
+     Can_Inp.width=Enc_Img_Width; 
+     Can_Inp.height=Enc_Img_Height;
+     Ctx_Inp.drawImage(InputImg_Name,0,0);           
+     if (Enc_Img_Width!=Enc_Img_Width_Prev)
+     {
+      Enc_Cir_Rad=Math.floor(0.25*Enc_Img_Width);
+      ColByteOffset=2*Enc_Img_Width*Enc_Img_Height;      
+      DefaultValues();       Enc_Img_Width_Prev=Enc_Img_Width;
+     }
+     
+     ImgData_Inp=Ctx_Inp.getImageData(0,0,Enc_Img_Width,Enc_Img_Height);      Pix_Inp=ImgData_Inp.data;      
+     Out_Img_Width=window.innerWidth-20;
+          Can_Out.width=Out_Img_Width;
+    
+     Out_Img_Win_Height=window.innerHeight-150;
+          Can_Out.height=Out_Img_Win_Height;
+     Out_Img_Height=Out_Img_Win_Height-Bot_Leg_Height;
+     
+               if (Out_Img_Width<Out_Img_Height)
+     {
+      Out_Img_Siz_Def=parseInt(0.5*Out_Img_Width)-3;
+     }
+     else 
+     {
+      Out_Img_Siz_Def=parseInt(0.5*Out_Img_Height)-3;
+     }
+     Out_Img_Siz_Prev=Out_Img_Siz_Def;
+     
+     InputImg_Check();      OutputImage();
+    }
+   }
+   
+      function DefaultValues()
+   {
+    var Row; var Col;      var Row_Right; var Col_Right; 
+    var Row_Left; var Col_Left;
+    var Row_Top; var Col_Top;
+    var Row_Bottom; var Col_Bottom;
+    var Ind_Inp;
+	
+        for (Row=0;Row<2*Enc_Cir_Rad;Row++)     {
+     Col_Left_Cir[Row]=Enc_Cir_Rad-1;
+     Col_Right_Cir[Row]=Enc_Cir_Rad; 
+          for (Col=0;Col<2*Enc_Cir_Rad;Col++)      {
+            if (((Row-Enc_Cir_Rad+0.5)*(Row-Enc_Cir_Rad+0.5)+(Col-Enc_Cir_Rad+0.5)*(Col-Enc_Cir_Rad+0.5))<(Enc_Cir_Rad*Enc_Cir_Rad))
+      {
+	      if (Col<Col_Left_Cir[Row]) Col_Left_Cir[Row]=Col;
+       if (Col>Col_Right_Cir[Row]) Col_Right_Cir[Row]=Col;
+      }
+     }	  
+    }
+
+    for (Row=0;Row<2*Enc_Cir_Rad;Row++)     {
+          for (Col=Col_Left_Cir[Row];Col<=2*Enc_Cir_Rad+Col_Right_Cir[Row];Col++)
+     {
+            if (Col==(Col_Right_Cir[Row]+1)) Col=2*Enc_Cir_Rad+Col_Left_Cir[Row];
+      
+            Row_Right=Row;
+      Col_Right=Col+1;
+            if (Col==Col_Right_Cir[Row]) Col_Right=2*Enc_Cir_Rad+Col_Left_Cir[Row];
+      if ((Col-2*Enc_Cir_Rad)==Col_Right_Cir[Row]) Col_Right=Col_Left_Cir[Row];
+            Ind_Inp=Enc_Img_Width*Row+Col;
+      Ind_Inp_Right[Ind_Inp]=Enc_Img_Width*Row_Right+Col_Right;
+      
+                  Row_Top=Row-1; Col_Top=Col;       if (Row==0) { Row_Top=0; Col_Top=Enc_Img_Width-1-Col; }       else
+      {
+       if (Col<Enc_Cir_Rad)        {
+                if ( (Row<Enc_Cir_Rad) && (Col<Col_Left_Cir[Row-1]) ) Col_Top=Col_Left_Cir[Row-1];
+       }        else
+       {
+                        if (Col<2*Enc_Cir_Rad)
+        { 
+                  if ( (Row<Enc_Cir_Rad) && (Col>=Col_Right_Cir[Row-1] ) ) Col_Top=Col_Right_Cir[Row-1];
+                  if ( (Row>Enc_Cir_Rad) && (Col==Col_Right_Cir[Row] ) ) Col_Top=Col_Right_Cir[Row-1];
+        }
+        else
+        {
+                           if (Col<3*Enc_Cir_Rad) 
+         { 
+                              if ( (Row<Enc_Cir_Rad) && ((Col-2*Enc_Cir_Rad)<Col_Left_Cir[Row-1]) ) Col_Top=2*Enc_Cir_Rad+Col_Left_Cir[Row-1]; 
+         }
+         else 
+         {
+                    if ( (Row<Enc_Cir_Rad) && ((Col-2*Enc_Cir_Rad)>Col_Right_Cir[Row-1]) ) Col_Top=2*Enc_Cir_Rad+Col_Right_Cir[Row-1];
+                    if ( (Row>Enc_Cir_Rad) && ((Col-2*Enc_Cir_Rad)==Col_Right_Cir[Row] ) ) Col_Top=2*Enc_Cir_Rad+Col_Right_Cir[Row-1];
+         }
+        }
+       }
+      }
+      Ind_Inp_Top[Ind_Inp]=Enc_Img_Width*Row_Top+Col_Top;
+      
+      Row_Left=Row;
+      Col_Left=Col-1;
+      if (Col==Col_Left_Cir[Row]) Col_Left=2*Enc_Cir_Rad+Col_Right_Cir[Row];
+      if ((Col-2*Enc_Cir_Rad)==Col_Left_Cir[Row]) Col_Left=Col_Right_Cir[Row];
+      Ind_Inp_Left[Ind_Inp]=Enc_Img_Width*Row_Left+Col_Left;
+      
+      Row_Bottom=Row+1; Col_Bottom=Col;       if (Row==2*Enc_Cir_Rad) { Row_Bottom=2*Enc_Cir_Rad; Col_Bottom=Enc_Img_Width-1-Col; }       else
+      {
+              if (Col<Enc_Cir_Rad)
+       { 
+                if ( (Row<Enc_Cir_Rad) && (Col==Col_Left_Cir[Row]) ) Col_Bottom=Col_Left_Cir[Row+1]; 
+                if ( (Row>Enc_Cir_Rad) && (Col<Col_Left_Cir[Row+1]) ) Col_Bottom=Col_Left_Cir[Row+1]; 
+       }
+       else
+       {
+                        if (Col<2*Enc_Cir_Rad)
+        {
+                  if ( (Row>Enc_Cir_Rad) && (Col>Col_Right_Cir[Row+1]) ) Col_Bottom=Col_Right_Cir[Row+1];
+        }
+        else
+        {         if (Col<3*Enc_Cir_Rad)
+         {
+                    if ( (Row<Enc_Cir_Rad) && ((Col-2*Enc_Cir_Rad)==Col_Left_Cir[Row]) ) Col_Bottom=2*Enc_Cir_Rad+Col_Left_Cir[Row+1];
+          if ( (Row>Enc_Cir_Rad) && ((Col-2*Enc_Cir_Rad)<Col_Left_Cir[Row+1]) ) Col_Bottom=2*Enc_Cir_Rad+Col_Left_Cir[Row+1]; 
+         }
+         else 
+         { 
+                    if ( (Row>Enc_Cir_Rad) && ((Col-2*Enc_Cir_Rad)>Col_Right_Cir[Row+1]) ) Col_Bottom=2*Enc_Cir_Rad+Col_Right_Cir[Row+1]; 
+         }         }
+       }
+      }
+      Ind_Inp_Bottom[Ind_Inp]=Enc_Img_Width*Row_Bottom+Col_Bottom;
+     }
+    }     
+       }
+						
+      function InputImg_Check()
+   {
+    var Row; var Col;     var Hor_S; var Ver_S;     var X; var Y; var Z;         var Ind_Inp;     var r; var g; var b; var d;     var Scal_Fact;
+        var Pix_Place=2;
+   
+    FCFI_Chk=1;      Kind=0;     Mark_Chk=false;
+		
+    if ( (Pix_Inp[0]!=52) && (Pix_Inp[1]!=52) && (Pix_Inp[2]!=52) ) FCFI_Chk=0;     if ( (Pix_Inp[4]!=67) && (Pix_Inp[5]!=67) && (Pix_Inp[6]!=67) ) FCFI_Chk=0;     if ( (Pix_Inp[8]!=70) && (Pix_Inp[9]!=70) && (Pix_Inp[10]!=70) ) FCFI_Chk=0;     if ( (Pix_Inp[12]!=73) && (Pix_Inp[13]!=73) && (Pix_Inp[14]!=73) ) FCFI_Chk=0;     if ( (Pix_Inp[60]==49) && (Pix_Inp[61]==49) && (Pix_Inp[62]==49) ) Kind=1;         if ( (Pix_Inp[60]==50) && (Pix_Inp[61]==50) && (Pix_Inp[62]==50) ) Kind=2;     	
+    if (Kind==1)     {
+     Scal_Fact=Out_Img_Siz_Def/250;
+     
+     for (Row=0;Row<2*Enc_Cir_Rad;Row++)      {
+      Ver_S=(-Enc_Cir_Rad+0.5+Row)/Enc_Cir_Rad;       for (Col=Col_Left_Cir[Row];Col<=2*Enc_Cir_Rad+Col_Right_Cir[Row];Col++)       {
+              if (Col==(Col_Right_Cir[Row]+1)) Col=2*Enc_Cir_Rad+Col_Left_Cir[Row]; 
+              if (Col<2*Enc_Cir_Rad) Hor_S=(-Enc_Cir_Rad+0.5+Col)/Enc_Cir_Rad;        else Hor_S=(-3*Enc_Cir_Rad+0.5+Col)/Enc_Cir_Rad;        Ind_Inp=Enc_Img_Width*(2*Enc_Cir_Rad-1-Row)+Col;	   	  
+       X=-1.0+(2.0/(1.0+Hor_S*Hor_S+Ver_S*Ver_S));        Y=Hor_S*(1.0+X);        Z=Ver_S*(1.0+X);
+       if (Col>=2*Enc_Cir_Rad)        { X=-X; Y=-Y; }        
+              r=Pix_Inp[4*Ind_Inp]; g=Pix_Inp[4*Ind_Inp+1]-r; b=Pix_Inp[4*Ind_Inp+2]-r; 
+                                   d=Scal_Fact*(r+0.1*(b-0.5*g*g+4.5*g));
+              X_Inp[Ind_Inp]=X;
+       Y_Inp[Ind_Inp]=Y;
+       Z_Inp[Ind_Inp]=Z;
+       D_Inp[Ind_Inp]=d;				
+      }
+     }
+     
+     r=Pix_Inp[4*Enc_Img_Width]; g=Pix_Inp[4*Enc_Img_Width+1]; b=Pix_Inp[4*Enc_Img_Width+2];      if ( (r==77) && (g==r) && (b==r) )      {
+      r=Pix_Inp[4*Enc_Img_Width+4]; g=Pix_Inp[4*Enc_Img_Width+5]; b=Pix_Inp[4*Enc_Img_Width+6];       if ((r==g) && (r==b))
+      {
+       Mark_Len=r;
+       Mark_Chk=true;
+       
+       r=Pix_Inp[4*Enc_Img_Width+8]; g=Pix_Inp[4*Enc_Img_Width+9]; b=Pix_Inp[4*Enc_Img_Width+10];
+       while ( (r!=255) && (g==r) && (b==r) && (Pix_Place<50) )        {
+        if ( (r==32) || (r==28) || (r==29) || (r==30) || (r==31) ) Marker_Text+=" ";         else Marker_Text+=String.fromCharCode(r);         Pix_Place++;
+        r=Pix_Inp[4*Enc_Img_Width+4*Pix_Place]; g=Pix_Inp[4*Enc_Img_Width+4*Pix_Place+1]; b=Pix_Inp[4*Enc_Img_Width+4*Pix_Place+2];        } 
+      }
+     }
+    }
+    if (FCFI_Chk==0)
+    {
+     document.getElementById('3DView_Initial_Position_Id').style.visibility='hidden';
+     document.getElementById('Rotate_Id').style.visibility='hidden';
+     document.getElementById('Displace_Id').style.visibility='hidden';
+     document.getElementById('FreeDraw_Id').style.visibility='hidden';
+     document.getElementById('TextWrite_Id').style.visibility='hidden';
+     document.getElementById('Embed_Id').style.visibility='hidden';
+     document.getElementById('Pen_Thick_Id').style.visibility='hidden';
+     document.getElementById('FavColor_Id').style.visibility='hidden';
+     document.getElementById('Font_Size_Id').style.visibility='hidden';
+     document.getElementById('Text_Content_Id').style.visibility='visible';
+     Text_Content_Id.value='Error in Input Coded Image!'
+    }
+    
+    if (FCFI_Chk==1)
+    {
+     Anim_Play=true; 
+     Rot_Ang=Rot_Ang_Tmp;
+     document.getElementById('Output').style.cursor='pointer';
+     UserMode=1; ViewModeOpt=1;
+     Shft_Net_y=0; Shft_Net_z=0;
+     Qp0=1.0; Qp1=0.0; Qp2=0.0; Qp3=0.0;
+     Mag=1.0; View_Dist=100.0;
+     HideColSize();
+     document.getElementById('3DView_Initial_Position_Id').src='Images/Buttons/Initial.png';
+     document.getElementById('3DView_Initial_Position_Id').style.visibility='visible';
+     document.getElementById('Rotate_Id').style.visibility='visible';
+     document.getElementById('Displace_Id').style.visibility='visible';
+     document.getElementById('FreeDraw_Id').style.visibility='visible';
+     document.getElementById('TextWrite_Id').style.visibility='visible';
+     ButtonWhiteBorders();
+     document.getElementById('Rotate_Id').style.border = '3px solid #00FF00';
+    }
+   }
+   
+      function ResizeRender()
+   {
+    Out_Img_Width=window.innerWidth-20;
+        Can_Out.width=Out_Img_Width;
+    
+    Out_Img_Win_Height=window.innerHeight-150;
+        Can_Out.height=Out_Img_Win_Height;
+    Out_Img_Height=Out_Img_Win_Height-Bot_Leg_Height;
+  
+            if (Out_Img_Width<Out_Img_Height)
+    {
+     Out_Img_Siz_Def=parseInt(0.5*Out_Img_Width)-3;
+    }
+    else 
+    {
+     Out_Img_Siz_Def=parseInt(0.5*Out_Img_Height)-3;
+    }
+    
+    if (UserMode<4)
+    {
+     if (Kind==1)
+     {
+      for (Row=0;Row<2*Enc_Cir_Rad;Row++)       {
+       for (Col=Col_Left_Cir[Row];Col<=2*Enc_Cir_Rad+Col_Right_Cir[Row];Col++)        {
+                if (Col==(Col_Right_Cir[Row]+1)) Col=2*Enc_Cir_Rad+Col_Left_Cir[Row];
+        Ind_Inp=Enc_Img_Width*(2*Enc_Cir_Rad-1-Row)+Col;        D_Inp[Ind_Inp]=D_Inp[Ind_Inp]*Out_Img_Siz_Def/Out_Img_Siz_Prev;
+       }
+      }
+      Out_Img_Siz_Prev=Out_Img_Siz_Def;
+     }
+     Anim_Play=false; UserMode=1;
+     OutputImage();
+    }
+    if (UserMode==4)
+    {
+     FCFImage();
+    }
+   }
+   
+      function OutputImage()
+   {
+        var Row; var Col; var Ind_Inp; var Ind_Out;
+    var Mark_Pxls;     
+    var Qa0; var Qa1; var Qa2; var Qa3;         var Qt0; var Qt1; var Qt2;	var Qt3;
+   
+        if ( (FCFI_Chk==1) && (Kind!=0) && (UserMode==1) ) 
+    {
+     Ctx_Out.fillStyle='#FFFFFF';      Ctx_Out.fillRect(0,0,Out_Img_Width,Out_Img_Win_Height); 	 
+     ImgData_Out=Ctx_Out.getImageData(0,0,Out_Img_Width,Out_Img_Win_Height);      Pix_Out=ImgData_Out.data; 	 
+          switch(RotMode)
+     {
+      case 1: { Rot_Axis_x=-1.0; Rot_Axis_y=0.0; Rot_Axis_z=0.0; break; }       case 2: { Rot_Axis_x=1.0; Rot_Axis_y=0.0; Rot_Axis_z=0.0; break; }       case 3: { Rot_Axis_x=0.0; Rot_Axis_y=0.0; Rot_Axis_z=-1.0; break; }       case 4: { Rot_Axis_x=0.0; Rot_Axis_y=0.0; Rot_Axis_z=1.0; break; }       case 5: { Rot_Axis_x=0.0; Rot_Axis_y=-1.0; Rot_Axis_z=0.0; break; }       case 6: { Rot_Axis_x=0.0; Rot_Axis_y=1.0; Rot_Axis_z=0.0; break; }       case 7: { Qp0=Qtp0; Qp1=Qtp1; Qp2=Qtp2; Qp3=Qtp3; break; }
+     }
+
+          Qa0=Math.cos(Rot_Ang/2); 
+     Qa1=Math.sin(Rot_Ang/2)*Rot_Axis_x;
+     Qa2=Math.sin(Rot_Ang/2)*Rot_Axis_y;
+     Qa3=Math.sin(Rot_Ang/2)*Rot_Axis_z;
+     
+          Qt0=Qa0*Qp0-Qa1*Qp1-Qa2*Qp2-Qa3*Qp3;
+     Qt1=Qa0*Qp1+Qa1*Qp0+Qa2*Qp3-Qa3*Qp2;
+     Qt2=Qa0*Qp2+Qa2*Qp0+Qa3*Qp1-Qa1*Qp3;
+     Qt3=Qa0*Qp3+Qa3*Qp0+Qa1*Qp2-Qa2*Qp1;
+     Qp0=Qt0; Qp1=Qt1; Qp2=Qt2; Qp3=Qt3;
+
+          Qt0=-Qp1; Qt1=Qp0; Qt2=Qp3; Qt3=-Qp2;
+     Nx=-Qt0*Qp1+Qt1*Qp0-Qt2*Qp3+Qt3*Qp2;
+     Ny=-Qt0*Qp2+Qt2*Qp0-Qt3*Qp1+Qt1*Qp3;
+     Nz=-Qt0*Qp3+Qt3*Qp0-Qt1*Qp2+Qt2*Qp1;
+    
+     Qt0=-Qp2;  Qt1=-Qp3; Qt2=Qp0; Qt3=Qp1;
+     T1x=-Qt0*Qp1+Qt1*Qp0-Qt2*Qp3+Qt3*Qp2;
+     T1y=-Qt0*Qp2+Qt2*Qp0-Qt3*Qp1+Qt1*Qp3;
+     T1z=-Qt0*Qp3+Qt3*Qp0-Qt1*Qp2+Qt2*Qp1;
+
+     Qt0=-Qp3; Qt1=Qp2; Qt2=-Qp1; Qt3=Qp0;
+     T2x=-Qt0*Qp1+Qt1*Qp0-Qt2*Qp3+Qt3*Qp2;
+     T2y=-Qt0*Qp2+Qt2*Qp0-Qt3*Qp1+Qt1*Qp3;
+     T2z=-Qt0*Qp3+Qt3*Qp0-Qt1*Qp2+Qt2*Qp1;
+					
+     for (Ind_Out=0;Ind_Out<Out_Img_Height*Out_Img_Width;Ind_Out++) Reso_Dist_Min[Ind_Out]=-20000.0;  
+     
+     if (Kind==1) Kind1_Image();
+     if (Kind==2) Kind2_Image();
+	 
+     if ( (Mark_Chk==true) && (View_Dist>95) )      {
+      Mark_Pxls=Math.round(Mark_Len*Mag*Out_Img_Siz_Def/250.0); 	  
+            for (Row=Out_Img_Height+5;Row<=Out_Img_Height+15;Row++)       {
+       for (Col=0;Col<Mark_Pxls;Col++)        {
+        Ind_Out=4*(Row*Out_Img_Width+Col+10);
+        Pix_Out[Ind_Out]=0;
+        Pix_Out[Ind_Out+1]=0;
+        Pix_Out[Ind_Out+2]=0;        }
+      }
+	    }
+ 
+          Ctx_Out.putImageData(ImgData_Out,0,0,0,0,Out_Img_Width,Out_Img_Win_Height);
+	  
+          if (Mark_Chk==true)
+     {
+      Ctx_Out.fillStyle='#000000';
+      Ctx_Out.font='10px Arial';
+      Ctx_Out.textAlign='left';
+      Ctx_Out.textBaseline='middle';
+      Ctx_Out.fillText(Marker_Text,15+Mark_Pxls,Out_Img_Height+10);
+     }
+     if (Anim_Play==true) requestAnimationFrame(OutputImage);     }
+   }
+
+      function Kind1_Image()
+   {
+        var Row; var Col; var Ind_Inp; var Ind_Inp_Mat; var Ind_Out;
+    var Ind_Inp_R; var Ind_Inp_T; var Ind_Inp_L; var Ind_Inp_B; var Ind_Inp_Col;
+        	 
+        var x_Out=[]; var y_Scr=[]; var z_Scr=[];
+	 
+    var Quad;
+		
+    var ys1; var zs1; var x1; var r1; var g1; var b1;
+    var Row2; var Col2; var ys2; var zs2; var x2; var r2; var g2; var b2;
+    var Row3; var Col3; var ys3; var zs3; var x3; var r3; var g3; var b3;
+				
+    var ys_min; var zs_min; var ys_max; var zs_max;
+    var ys_ran_int; var zs_ran_int;
+    var ys_int; var zs_int;
+				
+    var ysp; var zsp; var xp;
+    var Col_Out; var Row_Out;
+				
+    var Area_p23; var Area_p31; var Area_p12; var Area_123;
+    var Frac1; var Frac2; var Frac3; 
+				
+    var Rowtp; var Coltp;
+    var Fact1; var Fact2; var Fact3
+    var Out_Img_Half_Width; var Out_Img_Half_Height;
+    var Out_Img_Outer_Half_Width; var Out_Img_Outer_Half_Height;
+    
+    var y23; var z23; var f23;
+    var y31; var z31; var f31;
+    var Den; var Enc_Cir_Dia=2*Enc_Cir_Rad;
+    var Col_Right_Cir_Nxt;
+	    
+    				
+    Out_Img_Outer_Half_Width=(Out_Img_Width+Canv_Bor_Allow)/2;
+    Out_Img_Outer_Half_Height=(Out_Img_Height+Canv_Bor_Allow)/2;
+    Out_Img_Half_Width=Out_Img_Width/2;
+    Out_Img_Half_Height=Out_Img_Height/2;
+    Fact1=Mag*View_Dist*Enc_Cir_Rad;
+    Fact2=View_Dist*Enc_Cir_Rad;
+    
+    for (Row=0;Row<Enc_Cir_Dia;Row++)
+    {
+     Ind_Inp=Enc_Img_Width*Row+Col_Left_Cir[Row];
+     Col_Right_Cir_Nxt=Col_Right_Cir[Row]+1;
+     for (Col=Col_Left_Cir[Row];Col<=Enc_Cir_Dia+Col_Right_Cir[Row];Col++,Ind_Inp++)
+     {
+      if (Col==Col_Right_Cir_Nxt) 
+      {
+       Col=Enc_Cir_Dia+Col_Left_Cir[Row];
+       Ind_Inp=Enc_Img_Width*Row+Col;
+      }
+            x_Out[Ind_Inp]=(X_Inp[Ind_Inp]*Nx+Y_Inp[Ind_Inp]*T1x+Z_Inp[Ind_Inp]*T2x)*D_Inp[Ind_Inp];
+      Fact3=Fact1/(Fact2-x_Out[Ind_Inp]);   
+      y_Scr[Ind_Inp]=((X_Inp[Ind_Inp]*Ny+Y_Inp[Ind_Inp]*T1y+Z_Inp[Ind_Inp]*T2y)*D_Inp[Ind_Inp]+Shft_Net_y)*Fact3;
+      z_Scr[Ind_Inp]=((X_Inp[Ind_Inp]*Nz+Y_Inp[Ind_Inp]*T1z+Z_Inp[Ind_Inp]*T2z)*D_Inp[Ind_Inp]+Shft_Net_z)*Fact3; 
+     }
+    } 
+	 
+    for (Row=0;Row<Enc_Cir_Dia;Row++)
+    {
+     Ind_Inp=Enc_Img_Width*Row+Col_Left_Cir[Row];
+     Col_Right_Cir_Nxt=Col_Right_Cir[Row]+1;
+     for (Col=Col_Left_Cir[Row];Col<=Enc_Cir_Dia+Col_Right_Cir[Row];Col++,Ind_Inp++)
+     {
+      if (Col==Col_Right_Cir_Nxt) 
+      {
+       Col=Enc_Cir_Dia+Col_Left_Cir[Row];
+       Ind_Inp=Enc_Img_Width*Row+Col;
+      }
+      ys1=y_Scr[Ind_Inp]; zs1=z_Scr[Ind_Inp]; 
+    
+      if ( (Math.abs(ys1)<Out_Img_Outer_Half_Width) && (Math.abs(zs1)<(Out_Img_Outer_Half_Height)) )
+      {
+       Ind_Inp_Mat=ColByteOffset+4*Ind_Inp;
+       x1=x_Out[Ind_Inp]; 
+       r1=Pix_Inp[Ind_Inp_Mat];
+       g1=Pix_Inp[Ind_Inp_Mat+1]; 
+       b1=Pix_Inp[Ind_Inp_Mat+2];
+       
+       for (Quad=1;Quad<=2;Quad++)
+       {
+        if (Quad==1)
+        {
+         Ind_Inp_R=Ind_Inp_Right[Ind_Inp];
+         ys2=y_Scr[Ind_Inp_R]; 
+         zs2=z_Scr[Ind_Inp_R];
+         x2=x_Out[Ind_Inp_R];
+         Ind_Inp_Mat=ColByteOffset+4*Ind_Inp_R;
+         r2=Pix_Inp[Ind_Inp_Mat];
+         g2=Pix_Inp[Ind_Inp_Mat+1]; 
+         b2=Pix_Inp[Ind_Inp_Mat+2];
+         
+         Ind_Inp_T=Ind_Inp_Top[Ind_Inp];
+         ys3=y_Scr[Ind_Inp_T]; 
+         zs3=z_Scr[Ind_Inp_T];
+         x3=x_Out[Ind_Inp_T];
+         Ind_Inp_Mat=ColByteOffset+4*Ind_Inp_T;
+         r3=Pix_Inp[Ind_Inp_Mat];
+         g3=Pix_Inp[Ind_Inp_Mat+1]; 
+         b3=Pix_Inp[Ind_Inp_Mat+2];        
+        }
+        else
+        {
+         Ind_Inp_L=Ind_Inp_Left[Ind_Inp];
+         ys2=y_Scr[Ind_Inp_L]; 
+         zs2=z_Scr[Ind_Inp_L];
+         x2=x_Out[Ind_Inp_L];
+         Ind_Inp_Mat=ColByteOffset+4*Ind_Inp_L;
+         r2=Pix_Inp[Ind_Inp_Mat];
+         g2=Pix_Inp[Ind_Inp_Mat+1]; 
+         b2=Pix_Inp[Ind_Inp_Mat+2];
+         
+         Ind_Inp_B=Ind_Inp_Bottom[Ind_Inp];
+         ys3=y_Scr[Ind_Inp_B]; 
+         zs3=z_Scr[Ind_Inp_B];
+         x3=x_Out[Ind_Inp_B];
+         Ind_Inp_Mat=ColByteOffset+4*Ind_Inp_B;
+         r3=Pix_Inp[Ind_Inp_Mat];
+         g3=Pix_Inp[Ind_Inp_Mat+1]; 
+         b3=Pix_Inp[Ind_Inp_Mat+2];       
+        }
+        
+        ys_min=ys1; if (ys2<ys_min) ys_min=ys2; if (ys3<ys_min) ys_min=ys3; ys_min=Math.round(ys_min);
+        ys_max=ys1; if (ys2>ys_max) ys_max=ys2; if (ys3>ys_max) ys_max=ys3; ys_max=Math.round(ys_max);
+        
+        if (ys_max>ys_min)        {
+         zs_min=zs1; if (zs2<zs_min) zs_min=zs2; if (zs3<zs_min) zs_min=zs3; zs_min=Math.round(zs_min);
+         zs_max=zs1; if (zs2>zs_max) zs_max=zs2; if (zs3>zs_max) zs_max=zs3; zs_max=Math.round(zs_max);
+                
+         if (zs_max>zs_min) 
+         {
+                    y23=ys2-ys3; z23=zs2-zs3; f23=ys2*zs3-ys3*zs2;
+          Den=ys1*z23-zs1*y23+f23;
+          y23=y23/Den; z23=z23/Den; f23=f23/Den;    
+          y31=(ys3-ys1)/Den; z31=(zs3-zs1)/Den; f31=(ys3*zs1-ys1*zs3)/Den;
+           
+          for (zsp=zs_min+0.5;zsp<zs_max+0.5;zsp++)
+          {
+           for (ysp=ys_min+0.5;ysp<ys_max+0.5;ysp++)
+           {
+            Row_Out=Math.floor(Out_Img_Half_Height-zsp);
+            Col_Out=Math.floor(ysp+Out_Img_Half_Width);             if ( (Row_Out>=0) && (Row_Out<Out_Img_Height) && (Col_Out>=0) && (Col_Out<Out_Img_Width) )             {
+             Frac1=ysp*z23-zsp*y23+f23;
+             Frac2=ysp*z31-zsp*y31+f31;
+             Frac3=1.0-Frac1-Frac2;
+             if ( (Frac1>0) && (Frac2>0) && (Frac3>0) )
+             {
+              xp=x1*Frac1+x2*Frac2+x3*Frac3;               Ind_Out=Out_Img_Width*Row_Out+Col_Out;
+              Ind_Out_Mat=4*Ind_Out;
+                                           if (xp>Reso_Dist_Min[Ind_Out])               {     
+                                                            Pix_Out[Ind_Out_Mat]=Math.round(Frac1*r1+Frac2*r2+Frac3*r3);
+               Pix_Out[Ind_Out_Mat+1]=Math.round(Frac1*g1+Frac2*g2+Frac3*g3);
+               Pix_Out[Ind_Out_Mat+2]=Math.round(Frac1*b1+Frac2*b2+Frac3*b3);
+               Reso_Dist_Min[Ind_Out]=xp;
+              }  
+                            {
+                                                           }
+             }
+            }           
+           }  
+          }
+         }  
+        }
+       }
+      }
+     }
+    }
+   }
+      
+   function Kind2_Image()
+   {
+   }
+   
+         function HideColSize()
+   {
+    document.getElementById('Embed_Id').style.visibility='hidden';
+    document.getElementById('Pen_Thick_Id').style.visibility='hidden';
+    document.getElementById('FavColor_Id').style.visibility='hidden';
+    document.getElementById('Font_Size_Id').style.visibility='hidden';
+    document.getElementById('Text_Content_Id').style.visibility='hidden';
+   }			
+      function ButtonWhiteBorders()
+   {
+    document.getElementById('3DView_Initial_Position_Id').style.border = '3px solid white';
+    document.getElementById('Rotate_Id').style.border = '3px solid white';
+    document.getElementById('Displace_Id').style.border = '3px solid white';
+    document.getElementById('FreeDraw_Id').style.border = '3px solid white';
+    document.getElementById('TextWrite_Id').style.border = '3px solid white';
+    document.getElementById('Embed_Id').style.border = '3px solid white';
+   }
+   
+         function SelectLang()
+   {
+    switch(document.getElementById('Language_Id').value)
+    {
+     case 'ENG': 
+     {
+      document.getElementById('Globe').text='Globe';
+      document.getElementById('Cube').text='Cube';
+      document.getElementById('Cylinder').text='Cylinder';
+      document.getElementById('Cone').text='Cone';
+      document.getElementById('Tetrahedron').text='Tetrahedron';
+      document.getElementById('Octahedron').text='Octahedron';
+      document.getElementById('Dodecahedron').text='Dodecahedron';
+      document.getElementById('Icosahedron').text='Icosahedron';	
+						
+      if (UserMode==1) document.getElementById('3DView_Initial_Position_Id').title='Initial Position';else document.getElementById('3DView_Initial_Position_Id').title='View';
+      document.getElementById('TextWrite_Id').src='Images/Buttons/Text.png';
+      
+      document.getElementById('Rotate_Id').title='Rotate';
+      document.getElementById('Displace_Id').title='Displace';
+      document.getElementById('FreeDraw_Id').title='Draw';
+      document.getElementById('TextWrite_Id').title='Write';
+      document.getElementById('Embed_Id').title='Embed';
+      document.getElementById('InputImg_Id').title='FCF Image';
+      document.getElementById('FullScreen_Id').title='Full Screen';
+      document.getElementById('Pen_Thick_Id').title='Line Thickness';
+      document.getElementById('FavColor_Id').title='Text/Line Color Pick';
+      document.getElementById('Font_Size_Id').title='Font Size';
+      document.getElementById('Text_Content_Id').placeholder='Type Text';
+      break;					
+     }
+     case 'TAM':
+     { 
+      document.getElementById('Globe').text='பூமி';
+      document.getElementById('Cube').text='கன சதுரம்';
+      document.getElementById('Cylinder').text='உருளை';
+      document.getElementById('Cone').text='கூம்பு';
+      document.getElementById('Tetrahedron').text='நான்முகி';
+      document.getElementById('Octahedron').text='எண்முகி';
+      document.getElementById('Dodecahedron').text='பன்னிருமுகி';
+      document.getElementById('Icosahedron').text='இருபதுமுகி';
+						
+      if (UserMode==1) document.getElementById('3DView_Initial_Position_Id').title='ஆரம்ப நிலை';else document.getElementById('3DView_Initial_Position_Id').title='காண்';
+      document.getElementById('TextWrite_Id').src='Images/Buttons/TextTamil.png';
+      
+      document.getElementById('Rotate_Id').title='சுழற்று';
+      document.getElementById('Displace_Id').title='நகர்த்து';
+      document.getElementById('FreeDraw_Id').title='வரைக';
+      document.getElementById('TextWrite_Id').title='எழுதுக';
+      document.getElementById('Embed_Id').title='அச்சி்டு';
+      document.getElementById('InputImg_Id').title='நான்கு வட்ட பட படிவம்';
+      document.getElementById('FullScreen_Id').title='முழு திரை';
+      
+      document.getElementById('Pen_Thick_Id').title='கோடு தடிமன்';
+      document.getElementById('FavColor_Id').title='உரை/வரி நிறம்';
+      document.getElementById('Font_Size_Id').title='எழுத்துரு அளவு';
+      document.getElementById('Text_Content_Id').placeholder='சொல்';
+      break;
+     }
+     case 'HIN':
+     { 
+      document.getElementById('Globe').text='धरती';
+      document.getElementById('Cube').text='घनक्षेत्र';
+      document.getElementById('Cylinder').text='सिलेंडर';
+      document.getElementById('Cone').text='शंकु';
+      document.getElementById('Tetrahedron').text='चतुर्पाश्वीय';
+      document.getElementById('Octahedron').text='अष्टफलक';
+      document.getElementById('Dodecahedron').text='द्वादशफ़लक';
+      document.getElementById('Icosahedron').text='आईकोसाहेरोन';	
+      
+      if (UserMode==1) document.getElementById('3DView_Initial_Position_Id').title='शुरुआत का स्थान'; else document.getElementById('3DView_Initial_Position_Id').title='देख';
+      document.getElementById('TextWrite_Id').src='Images/Buttons/TextHindi.png';
+      
+      document.getElementById('Rotate_Id').title='घुमाएँ';
+      document.getElementById('Displace_Id').title='कदम';
+      document.getElementById('FreeDraw_Id').title='चित्र';
+      document.getElementById('TextWrite_Id').title='लिखो';
+      document.getElementById('Embed_Id').title='छापाு';
+      document.getElementById('InputImg_Id').title='चार क्षेत्र प्रारूप';
+      document.getElementById('FullScreen_Id').title=' पूर्ण स्क्रीन';
+     
+      document.getElementById('Pen_Thick_Id').title='रेखा मोटाई';
+      document.getElementById('FavColor_Id').title='पाठ / रेखा रंग';
+      document.getElementById('Font_Size_Id').title='फ़ॉन्ट आकार';
+      
+      document.getElementById('Text_Content_Id').placeholder='शब्द';
+      break;
+     }
+    }
+   }
+			
+      function SelectImg()    {
+    if (UserMode!=0) { SelectInputObject_Check_Render(Number(document.getElementById('Obj_Id').value)); }    }
+      
+         function InitialView()
+   {
+    document.getElementById('3DView_Initial_Position_Id').src='Images/Buttons/Initial.png';
+    switch(document.getElementById('Language_Id').value)
+    {
+     case 'ENG': document.getElementById('3DView_Initial_Position_Id').title='Initial Position'; break;
+     case 'TAM': document.getElementById('3DView_Initial_Position_Id').title='ஆரம்ப நிலை'; break;
+    }		
+				
+    document.getElementById('Rotate_Id').style.visibility='visible';
+    document.getElementById('Displace_Id').style.visibility='visible';
+    document.getElementById('FreeDraw_Id').style.visibility='visible';
+    document.getElementById('TextWrite_Id').style.visibility='visible';
+				
+    ButtonWhiteBorders();
+    HideColSize();
+    
+    if (UserMode==1)
+    {
+     document.getElementById('3DView_Initial_Position_Id').style.border = '3px solid red';
+	    
+     if (ViewModeOpt==0)
+     {
+      Qp0=0.999999985; Qp1=0.0001; Qp2=0.0001; Qp3=0.0001;
+      Rot_Ang=0; Mag=1.0;
+      Shft_Net_y=0; Shft_Net_z=0; View_Dist=100;
+     }
+     if (ViewModeOpt==1)
+     {
+      Qp0=0.999999985; Qp1=0.0001; Qp2=0.0001; Qp3=0.0001;
+      Rot_Ang=0; Mag=1.0;
+      ViewModeOpt=0;
+     }
+     if (ViewModeOpt==2)
+     {
+      Shft_Net_y=0; Shft_Net_z=0; View_Dist=100;
+      ViewModeOpt=0;
+     }
+    }
+    else 
+    {
+     document.getElementById('Rotate_Id').style.border = '3px solid red';
+     UserMode=1; ViewModeOPt=1;  
+    }
+
+    Anim_Play=false;
+    OutputImage();
+   }
+   
+      function RotateView()
+   {
+    UserMode=1;
+    HideColSize();
+    ButtonWhiteBorders();
+				
+    switch(RotMode)
+    {
+     case 1: document.getElementById('Rotate_Id').src='Images/Buttons/Clockwise.png'; break;
+     case 2: document.getElementById('Rotate_Id').src='Images/Buttons/Anticlockwise.png'; break;
+     case 3: document.getElementById('Rotate_Id').src='Images/Buttons/Leftward.png'; break;
+     case 4: document.getElementById('Rotate_Id').src='Images/Buttons/Rightward.png'; break;
+     case 5: document.getElementById('Rotate_Id').src='Images/Buttons/Upward.png'; break;
+     case 6: document.getElementById('Rotate_Id').src='Images/Buttons/Downward.png'; break;
+     default: document.getElementById('Rotate_Id').src='Images/Buttons/Rotate.png'; break;
+    }
+				ViewModeOpt=1;
+    if ((Anim_Play==false) && (ViewModeOpt==1)) 
+    { 
+     Anim_Play=true;
+     document.getElementById('Rotate_Id').style.border = '3px solid #00FF00';
+     Rot_Ang=Rot_Ang_Tmp;
+     OutputImage();
+    }
+    else 
+    {
+     Anim_Play=false;
+     Rot_Ang=0;
+     document.getElementById('Rotate_Id').style.border = '3px solid red';
+    }   
+   }
+			
+      function DisplaceView()
+   {
+    UserMode=1;
+    HideColSize();
+    ButtonWhiteBorders();
+    document.getElementById('Displace_Id').style.border = '3px solid red';
+			
+    Anim_Play=false;
+    Rot_Ang=0; 
+    if (ViewModeOpt==2)
+    {
+     switch(DispMode)
+     {
+      case 1: { document.getElementById('Displace_Id').src='Images/Buttons/RightMove.png'; Shft_Net_y+=2/Mag; break; }
+      case 2: { document.getElementById('Displace_Id').src='Images/Buttons/LeftMove.png'; Shft_Net_y-=2/Mag; break; }
+      case 3: { document.getElementById('Displace_Id').src='Images/Buttons/UpMove.png'; Shft_Net_z+=2/Mag; break; }
+      case 4: { document.getElementById('Displace_Id').src='Images/Buttons/DownMove.png'; Shft_Net_z-=2/Mag; break; }
+      case 5: { document.getElementById('Displace_Id').src='Images/Buttons/Closer.png';
+                if (View_Dist>=100) View_Dist=10; else View_Dist-=1;
+                break;
+              }
+      case 6: { document.getElementById('Displace_Id').src='Images/Buttons/Farther.png'; View_Dist+=1; break; }
+      case 7: { document.getElementById('Displace_Id').src='Images/Buttons/Displace.png'; break; }
+     }
+     if ( (View_Dist<=2) && (DispMode==5) ) { View_Dist=2; DispMode=6; }
+     else
+     {
+      if ( (View_Dist>10) && (DispMode==6) ) { View_Dist=100; DispMode=5; }
+     }
+    }
+    else ViewModeOpt=2;
+    OutputImage();
+   }
+   
+   
+   
+      function FreeHandEdit()
+   {
+    FreeHandORTextDrawEdit();
+    document.getElementById('FreeDraw_Id').style.border = '3px solid red';
+    UserMode=2;
+    document.getElementById('Embed_Id').style.visibility='visible';
+    document.getElementById('Pen_Thick_Id').style.visibility='visible';
+    document.getElementById('FavColor_Id').style.visibility='visible';
+    document.getElementById('Font_Size_Id').style.visibility='hidden';
+    document.getElementById('Text_Content_Id').style.visibility='hidden';
+   }
+			
+      function TextDrawEdit()
+   {
+    FreeHandORTextDrawEdit();
+    document.getElementById('TextWrite_Id').style.border = '3px solid red';
+    UserMode=3;
+    document.getElementById('Embed_Id').style.visibility='visible';
+    document.getElementById('Pen_Thick_Id').style.visibility='hidden';
+    document.getElementById('FavColor_Id').style.visibility='visible';
+    document.getElementById('Font_Size_Id').style.visibility='visible';
+    document.getElementById('Text_Content_Id').style.visibility='visible';
+   }
+			
+      function FreeHandORTextDrawEdit()
+   {
+    var Row; var Col; var Ind_Out;
+    ButtonWhiteBorders();
+    
+    if (UserMode==1)
+    {
+     for (Row=0;Row<Out_Img_Height;Row++)
+     {
+      for (Col=0;Col<Out_Img_Width;Col++)
+      {
+       Ind_Out=4*Out_Img_Width*Row+Col;
+       Pix_Out_Store[Ind_Out]=Pix_Out[Ind_Out];
+       Pix_Out_Store[Ind_Out+1]=Pix_Out[Ind_Out+1];
+       Pix_Out_Store[Ind_Out+2]=Pix_Out[Ind_Out+2];
+      }
+     }
+    }
+    document.getElementById('3DView_Initial_Position_Id').src='Images/Buttons/3DView.png';
+    switch(document.getElementById('Language_Id').value)
+    {
+     case 'ENG': document.getElementById('3DView_Initial_Position_Id').title='View'; break;
+     case 'TAM': document.getElementById('3DView_Initial_Position_Id').title='காண்'; break;
+     case 'HIN': document.getElementById('3DView_Initial_Position_Id').title='देख'; break;
+    }
+    Anim_Play=false;
+   }
+			
+      function EmbedEdit()
+   {
+        var Row; var Col; var Ind_Inp; var Ind_Inp_Mat;
+    var Row_Out; var Col_Out; var Ind_Out; var Ind_Out_Mat;
+        var X; var Y; var Z; var D; var x; var y; var z;
+    var Fact1;
+			
+    document.getElementById('3DView_Initial_Position_Id').style.border = '3px solid white';
+    document.getElementById('Rotate_Id').style.border = '3px solid white';
+    document.getElementById('Displace_Id').style.border = '3px solid white';
+    document.getElementById('FreeDraw_Id').style.border = '3px solid white';
+    document.getElementById('TextWrite_Id').style.border = '3px solid white';
+    document.getElementById('Embed_Id').style.border = '3px solid red';
+
+    ImgData_Out=Ctx_Out.getImageData(0,0,Out_Img_Width,Out_Img_Win_Height);     Pix_Out=ImgData_Out.data; 
+    var i;
+        if (Kind==1)
+    {
+     for (Row=0;Row<2*Enc_Cir_Rad;Row++)
+     {
+      for (Col=Col_Left_Cir[Row];Col<=2*Enc_Cir_Rad+Col_Right_Cir[Row];Col++)
+      {
+       if (Col==(Col_Right_Cir[Row]+1)) Col=2*Enc_Cir_Rad+Col_Left_Cir[Row];
+       Ind_Inp=Enc_Img_Width*(2*Enc_Cir_Rad-1-Row)+Col;
+	   
+       X=X_Inp[Ind_Inp]; Y=Y_Inp[Ind_Inp]; Z=Z_Inp[Ind_Inp];
+       D=D_Inp[Ind_Inp];
+	   
+       x=(X*Nx+Y*T1x+Z*T2x)*D;
+       y=(X*Ny+Y*T1y+Z*T2y)*D+Shft_Net_y;
+       z=(X*Nz+Y*T1z+Z*T2z)*D+Shft_Net_z; 
+	   
+       Fact1=View_Dist/(View_Dist-(x/Enc_Cir_Rad));
+       y1_scr=Mag*y*Fact1;
+       z1_scr=Mag*z*Fact1;
+							
+       Col_Out=Math.floor(y1_scr+0.5*Out_Img_Width);
+       Row_Out=Math.floor(0.5*Out_Img_Height-z1_scr);
+	
+       if ( (Col_Out>0) && (Col_Out<Out_Img_Width) && (Row_Out>0) && (Row_Out<Out_Img_Height) )
+       {
+        Ind_Out=Out_Img_Width*Row_Out+Col_Out;
+        if (Math.abs(x-Reso_Dist_Min[Ind_Out])<1)
+                {
+         Ind_Out_Mat=4*Ind_Out;
+         if ( (Pix_Out_Store[Ind_Out_Mat]!=Pix_Out[Ind_Out_Mat]) || (Pix_Out_Store[Ind_Out+1]!=Pix_Out[Ind_Out+1]) || (Pix_Out_Store[Ind_Out+2]!=Pix_Out[Ind_Out+2]) )
+         {
+                    Ind_Inp_Mat=ColByteOffset+4*Ind_Inp;
+          Pix_Inp[Ind_Inp_Mat]=Pix_Out[Ind_Out_Mat];
+          Pix_Inp[Ind_Inp_Mat+1]=Pix_Out[Ind_Out_Mat+1];
+          Pix_Inp[Ind_Inp_Mat+2]=Pix_Out[Ind_Out_Mat+2];
+        }
+       }
+      }	 
+     }
+    }
+    Ctx_Inp.putImageData(ImgData_Inp,0,0,0,0,Enc_Img_Width,Enc_Img_Height); 
+            FCF_Image.src=Can_Inp.toDataURL('image/png');
+    FCFImage();
+   }
+  }
+			
+      function FCFImage()
+   {
+    Anim_Play=false;
+                				
+    document.getElementById('Rotate_Id').style.visibility='hidden';
+    document.getElementById('Displace_Id').style.visibility='hidden';
+    document.getElementById('FreeDraw_Id').style.visibility='hidden';
+    document.getElementById('TextWrite_Id').style.visibility='hidden';
+    document.getElementById('Embed_Id').style.visibility='hidden';
+    document.getElementById('Pen_Thick_Id').style.visibility='hidden';
+    document.getElementById('FavColor_Id').style.visibility='hidden';
+    document.getElementById('Font_Size_Id').style.visibility='hidden';
+    document.getElementById('Text_Content_Id').style.visibility='hidden';
+ 				
+    document.getElementById('3DView_Initial_Position_Id').src='Images/Buttons/3DView.png';
+  			
+    Ctx_Out.fillStyle='#000000';     Ctx_Out.fillRect(0,0,Out_Img_Width,Out_Img_Win_Height); 	
+        				
+    if (Out_Img_Width>Out_Img_Win_Height)
+    {
+     Ctx_Out.drawImage(FCF_Image,0,0,Enc_Img_Width,Enc_Img_Height,(Out_Img_Width-Out_Img_Win_Height)/2,0,Out_Img_Win_Height,Out_Img_Win_Height);
+    }
+    else
+    {
+     Ctx_Out.drawImage(FCF_Image,0,0,Enc_Img_Width,Enc_Img_Height,0,(Out_Img_Win_Height-Out_Img_Width)/2,Out_Img_Width,Out_Img_Width);
+    }
+    switch(document.getElementById('Language_Id').value)
+    {
+     case 'ENG': document.getElementById('3DView_Initial_Position_Id').title='View'; break;
+     case 'TAM': document.getElementById('3DView_Initial_Position_Id').title='காண்'; break;
+     case 'HIN': document.getElementById('3DView_Initial_Position_Id').title='देख'; break;
+    } 
+    UserMode=4;
+           } 
+ 
+      function ColorTextLine()
+   {
+    Ctx_Out.strokeStyle=document.getElementById('FavColor_Id').value;
+    Ctx_Out.fillStyle=document.getElementById('FavColor_Id').value;
+   }
+  
+         function MouseDown(Ev)
+   {
+    if ( ((UserMode==1) || (UserMode==2) || (UserMode==3)) && (Ev.button==0) )
+    {
+     MouseDown_Status=true;
+     MouseMoved_Status=false;
+ 					
+     MouseTouch_Start_Col=Math.round(Ev.clientX-Can_Out.getBoundingClientRect().left);
+     MouseTouch_Start_Row=Math.round(Ev.clientY-Can_Out.getBoundingClientRect().top);
+     MouseTouchStart();
+    }
+   }
+  
+      function TouchStart(Ev)
+   {
+    Ev.stopPropagation(); Ev.preventDefault();
+    if (Ev.touches.length==1)
+    {
+     Touch2_Status=false;
+     if ( ((UserMode==1) || (UserMode==2) || (UserMode==3)) )
+     {
+      Touch1_Status=true;
+      Touch1Moved_Status=false;
+      Touch1StartTime= new Date();
+      MouseTouch_Start_Col=Math.round(Ev.touches[0].clientX-Can_Out.getBoundingClientRect().left);
+      MouseTouch_Start_Row=Math.round(Ev.touches[0].clientY-Can_Out.getBoundingClientRect().top);
+      MouseTouchStart();
+     }
+    }
+    if (Ev.touches.length==2)
+    {
+     Touch1_Status=false;
+
+     if ( (UserMode==1) && ((ViewModeOpt==1) || (ViewModeOpt==2)) )
+     {
+      Touch2_Status=true;
+      Touch2Moved_Status=false;
+      Qtp0=Qp0; Qtp1=Qp1; Qtp2=Qp2; Qtp3=Qp3;
+	     MagT=Mag;
+	     Shft_Net_y_tmp=Shft_Net_y;
+	     Shft_Net_z_tmp=Shft_Net_z;
+	  
+	     Touch2_OnObject=true;
+     
+      MouseTouch_Start_Col=Math.round(Ev.touches[0].clientX-Can_Out.getBoundingClientRect().left);
+      MouseTouch_Start_Row=Math.round(Ev.touches[0].clientY-Can_Out.getBoundingClientRect().top);
+      P1_Hor=MouseTouch_Start_Col-0.5*Out_Img_Width+0.5;
+      P1_Ver=-(MouseTouch_Start_Row-0.5*Out_Img_Height+0.5);
+	  
+	     Touch2_Start_x=Reso_Dist_Min[Out_Img_Width*MouseTouch_Start_Row+MouseTouch_Start_Col]
+      if (Touch2_Start_x<-15000.0) Touch2_OnObject=false;
+	  
+      MouseTouch_Start_Col=Math.round(Ev.touches[1].clientX-Can_Out.getBoundingClientRect().left);
+      MouseTouch_Start_Row=Math.round(Ev.touches[1].clientY-Can_Out.getBoundingClientRect().top);
+      P2_Hor=MouseTouch_Start_Col-0.5*Out_Img_Width+0.5;
+      P2_Ver=-(MouseTouch_Start_Row-0.5*Out_Img_Height+0.5);
+	  
+	     Touch2_Start_x=Reso_Dist_Min[Out_Img_Width*MouseTouch_Start_Row+MouseTouch_Start_Col]
+      if (Touch2_Start_x<-15000.0) Touch2_OnObject=false;
+     }
+    }
+   }
+		
+      function MouseTouchStart()
+   {
+    var Fact1;
+    MouseTouch_OnObject=false;
+			
+    if ( (UserMode==1) && ((ViewModeOpt==1) || (ViewModeOpt==2)) )
+    {
+     if (Anim_Play==true) Anim_Play_Temp=true; else Anim_Play_Temp=false;
+     Anim_Play=false;
+ 					
+     MouseTouch_Start_Hor=MouseTouch_Start_Col-0.5*Out_Img_Width+0.5;
+     MouseTouch_Start_Ver=-(MouseTouch_Start_Row-0.5*Out_Img_Height+0.5);
+     ButtonWhiteBorders();
+     if (ViewModeOpt==1) document.getElementById('Rotate_Id').style.border = '3px solid red';
+     if (ViewModeOpt==2) document.getElementById('Displace_Id').style.border = '3px solid red';
+     MouseTouch_Start_x=Reso_Dist_Min[Out_Img_Width*MouseTouch_Start_Row+MouseTouch_Start_Col]
+     if (MouseTouch_Start_x>-15000.0)
+     {
+      MouseTouch_OnObject=true;
+      if (ViewModeOpt==1)
+      {
+       Fact1=(View_Dist-(MouseTouch_Start_x/Enc_Cir_Rad))/View_Dist;
+       MouseTouch_Start_y=MouseTouch_Start_Hor*Fact1/Mag;
+       MouseTouch_Start_z=MouseTouch_Start_Ver*Fact1/Mag;
+       Qtp0=Qp0; Qtp1=Qp1; Qtp2=Qp2; Qtp3=Qp3;
+      }
+      if (ViewModeOpt==2)
+      { 
+       Shft_Net_y_tmp=Shft_Net_y;
+       Shft_Net_z_tmp=Shft_Net_z;
+      }
+     }
+    }
+    if (UserMode==2)
+    {
+     Stroke_Start_Col=MouseTouch_Start_Col;
+     Stroke_Start_Row=MouseTouch_Start_Row;
+     Ctx_Out.beginPath();
+     document.getElementById('FreeDraw_Id').style.border = '3px solid #00FF00';
+    }
+    if (UserMode==3) 
+    {
+          Ctx_Out.fillStyle=FavColor_Id.value;
+     Ctx_Out.font=Font_Size_Id.value;
+     Ctx_Out.textAlign='center';
+     Ctx_Out.textBaseline='middle';
+     Ctx_Out.fillText(Text_Content_Id.value,MouseTouch_Start_Col,MouseTouch_Start_Row);
+    }
+   }
+
+   function MouseMove(Ev)
+   {
+    if ( ((UserMode==1) || (UserMode==2) || (UserMode==3)) && (Ev.button==0) )
+    {
+     MouseMoved_Status=true;					
+     MouseTouch_Move_Col=Math.round(Ev.clientX-Can_Out.getBoundingClientRect().left);
+     MouseTouch_Move_Row=Math.round(Ev.clientY-Can_Out.getBoundingClientRect().top);
+     MouseTouchMove();
+    }
+   }
+
+   function TouchMove(Ev)
+   {
+    var P1M_Hor, P1M_Ver, P2M_Hor, P2M_Ver;
+    var MagP12, MagP12M, P12_Hor, P12_Ver, P12M_Hor, P12M_Ver;
+	   var Fact1;
+   
+    Ev.stopPropagation(); Ev.preventDefault();
+    if ((Ev.touches.length==1) )
+    {
+     if ( ((UserMode==1) || (UserMode==2) || (UserMode==3)) && (Touch1_Status==true) )
+     {
+      Touch1Moved_Status=true;					
+      MouseTouch_Move_Col=Math.round(Ev.touches[0].clientX-Can_Out.getBoundingClientRect().left);
+      MouseTouch_Move_Row=Math.round(Ev.touches[0].clientY-Can_Out.getBoundingClientRect().top);
+      MouseTouchMove();
+     }
+     else Touch1_Status=false;
+    }
+    
+    if ((Ev.touches.length==2) )
+    {
+     if ( (UserMode==1) && (Touch2_Status==true) && (Touch2_OnObject==true) )
+     {
+      Touch2Moved_Status=true;
+	  
+      MouseTouch_Start_Col=Math.round(Ev.touches[0].clientX-Can_Out.getBoundingClientRect().left);
+      MouseTouch_Start_Row=Math.round(Ev.touches[0].clientY-Can_Out.getBoundingClientRect().top);
+      P1M_Hor=MouseTouch_Start_Col-0.5*Out_Img_Width+0.5;
+      P1M_Ver=-(MouseTouch_Start_Row-0.5*Out_Img_Height+0.5);
+      
+      MouseTouch_Start_Col=Math.round(Ev.touches[1].clientX-Can_Out.getBoundingClientRect().left);
+      MouseTouch_Start_Row=Math.round(Ev.touches[1].clientY-Can_Out.getBoundingClientRect().top);
+      P2M_Hor=MouseTouch_Start_Col-0.5*Out_Img_Width+0.5;
+      P2M_Ver=-(MouseTouch_Start_Row-0.5*Out_Img_Height+0.5);
+
+      MagP12=Math.sqrt((P2_Hor-P1_Hor)*(P2_Hor-P1_Hor)+(P2_Ver-P1_Ver)*(P2_Ver-P1_Ver));
+      MagP12M=Math.sqrt((P2M_Hor-P1M_Hor)*(P2M_Hor-P1M_Hor)+(P2M_Ver-P1M_Ver)*(P2M_Ver-P1M_Ver));
+      Mag_Mul=MagP12M/MagP12;
+	        if ( (MagT*Mag_Mul>0.25) && (MagT*Mag_Mul<4) )
+      {
+       Mag=MagT*Mag_Mul;
+       P12_Hor=P2_Hor-P1_Hor; P12_Ver=P2_Ver-P1_Ver;
+       P12M_Hor=P2M_Hor-P1M_Hor; P12M_Ver=P2M_Ver-P1M_Ver;
+       Rot_Ang=Math.acos((P12_Hor*P12M_Hor+P12_Ver*P12M_Ver)/(MagP12*MagP12M));
+       if (P12_Hor*P12M_Ver<P12_Ver*P12M_Hor) Rot_Ang=-Rot_Ang;
+       Rot_Axis_x=1.0; Rot_Axis_y=0.0; Rot_Axis_z=0.0;
+       RotMode=7;
+	   
+	  	   Fact1=(View_Dist-(Touch2_Start_x/Enc_Cir_Rad))/View_Dist; 
+	   
+       Shft_Net_y=Shft_Net_y_tmp+((P1M_Hor/Mag_Mul)-P1_Hor*Math.cos(Rot_Ang)+P1_Ver*Math.sin(Rot_Ang))*Fact1/Mag;
+       Shft_Net_z=Shft_Net_z_tmp+((P1M_Ver/Mag_Mul)-P1_Hor*Math.sin(Rot_Ang)-P1_Ver*Math.cos(Rot_Ang))*Fact1/Mag;
+       document.getElementById('Rotate_Id').style.border='3px solid #00FF00';
+       document.getElementById('Displace_Id').style.border='3px solid #00FF00';
+       document.getElementById('Rotate_Id').src='Images/Buttons/Rotate.png';
+       document.getElementById('Displace_Id').src='Images/Buttons/Displace.png';
+       OutputImage();
+      }
+	  	  
+	       }
+     else Touch2_Status=false;
+    }
+   }   
+  
+   function MouseTouchMove()
+   {
+    var Fact1; var Fact2; var Fact3;
+    var a; var b; var c; var d;  var Det;
+    var x1; var y1; var z1; var x2; var y2; var z2;
+    var x; var y; var z; var Magn; var rx; var ry; var rz;
+
+    MouseTouch_Move_Hor=MouseTouch_Move_Col-0.5*Out_Img_Width+0.5;
+    MouseTouch_Move_Ver=-(MouseTouch_Move_Row-0.5*Out_Img_Height+0.5);
+				
+    if (UserMode==1)
+    {
+     if (ViewModeOpt==0) document.getElementById('Output').style.cursor='not-allowed';
+     else
+     {
+      if ( (MouseDown_Status==true) || (Touch1_Status==true) )	
+      {
+       if (MouseTouch_OnObject==true)
+       {			
+        if (ViewModeOpt==1)
+        {
+         Fact2=MouseTouch_Move_Hor*MouseTouch_Move_Hor+MouseTouch_Move_Ver*MouseTouch_Move_Ver;
+         Fact3=Mag*View_Dist*Enc_Cir_Rad;
+         a=1+(Fact2/(Fact3*Fact3));
+         b=-2*Fact2/(Mag*Fact3);
+         b+=2*(MouseTouch_Move_Hor*Shft_Net_y+MouseTouch_Move_Ver*Shft_Net_z)/Fact3;
+         								
+         d=Math.pow(MouseTouch_Start_x,2)+Math.pow(MouseTouch_Start_y-Shft_Net_y,2)+Math.pow(MouseTouch_Start_z-Shft_Net_z,2);
+ 		
+          								
+         c=Math.pow((MouseTouch_Move_Hor/Mag)-Shft_Net_y,2)+Math.pow((MouseTouch_Move_Ver/Mag)-Shft_Net_z,2)-d;
+ 						
+         Det=b*b-4*a*c;
+         document.getElementById('Rotate_Id').src='Images/Buttons/Rotate.png';
+         if (Det>=0)
+         {
+          x1=(-b+Math.sqrt(Det))/(2*a);
+          Fact1=(View_Dist-(x1/Enc_Cir_Rad))/View_Dist;
+          y1=(MouseTouch_Move_Hor*Fact1/Mag)-Shft_Net_y;
+          z1=(MouseTouch_Move_Ver*Fact1/Mag)-Shft_Net_z;
+ 									
+          x2=(-b-Math.sqrt(Det))/(2*a);
+          Fact1=(View_Dist-(x2/Enc_Cir_Rad))/View_Dist;
+          y2=(MouseTouch_Move_Hor*Fact1/Mag)-Shft_Net_y;
+          z2=(MouseTouch_Move_Ver*Fact1/Mag)-Shft_Net_z;
+	 								
+          if ( (MouseTouch_Start_x*(x1-x2)+(MouseTouch_Start_y-Shft_Net_y)*(y1-y2)+(MouseTouch_Start_z-Shft_Net_z)*(z1-z2))>0)
+          { 
+           x=x1; y=y1; z=z1;
+          }
+          else
+          {
+           x=x2; y=y2; z=z2;
+          }
+          rx=(MouseTouch_Start_y-Shft_Net_y)*z-(MouseTouch_Start_z-Shft_Net_z)*y;
+          ry=(MouseTouch_Start_z-Shft_Net_z)*x-MouseTouch_Start_x*z;
+          rz=MouseTouch_Start_x*y-(MouseTouch_Start_y-Shft_Net_y)*x;
+          Magn=Math.sqrt(rx*rx+ry*ry+rz*rz);
+          Rot_Axis_x=rx/Magn;
+          Rot_Axis_y=ry/Magn;
+          Rot_Axis_z=rz/Magn;
+          Rot_Ang=Math.acos((MouseTouch_Start_x*x+(MouseTouch_Start_y-Shft_Net_y)*y+(MouseTouch_Start_z-Shft_Net_z)*z)/d);
+          RotMode=7;
+          document.getElementById('Rotate_Id').style.border='3px solid #00FF00';
+          document.getElementById('Output').style.cursor='crosshair';
+                             }
+         else 
+         {
+          document.getElementById('Rotate_Id').style.border='3px solid red';
+          document.getElementById('Output').style.cursor='not-allowed';
+         }
+        }
+        if (ViewModeOpt==2)
+        {
+         Fact1=(View_Dist-(MouseTouch_Start_x/Enc_Cir_Rad))/View_Dist; 							
+         Shft_Net_y=Shft_Net_y_tmp+(MouseTouch_Move_Hor-MouseTouch_Start_Hor)*Fact1/Mag;
+         Shft_Net_z=Shft_Net_z_tmp+(MouseTouch_Move_Ver-MouseTouch_Start_Ver)*Fact1/Mag;
+         document.getElementById('Displace_Id').src='Images/Buttons/Displace.png';
+         document.getElementById('Output').style.cursor='grabbing';
+         document.getElementById('Displace_Id').style.border='3px solid #00FF00';
+        }
+        OutputImage();
+       }
+       else
+       {
+        document.getElementById('Output').style.cursor='not-allowed';
+       }
+      }
+      else
+      {
+       if (Reso_Dist_Min[Out_Img_Width*(MouseTouch_Move_Row)+MouseTouch_Move_Col]>-15000.0)
+       {
+        if (ViewModeOpt==1) document.getElementById('Output').style.cursor='crosshair';
+        if (ViewModeOpt==2) document.getElementById('Output').style.cursor='grab';
+       }
+       else
+       {
+        if ( Math.abs(MouseTouch_Move_Hor/Mag-Shft_Net_y)>Math.abs(MouseTouch_Move_Ver/Mag-Shft_Net_z) )
+        {
+         document.getElementById('Output').style.cursor='e-resize';
+        }
+        else
+        {
+         document.getElementById('Output').style.cursor='n-resize';
+        }
+       }
+      }
+     }
+	    }
+    else document.getElementById('Output').style.cursor='default';
+    if ((UserMode==2) && ((MouseDown_Status==true) || (Touch1_Status==true)) )
+    {
+     Ctx_Out.lineWidth=Pen_Thick_Id.value;
+     Ctx_Out.strokeStyle=FavColor_Id.value;
+     Ctx_Out.moveTo(Stroke_Start_Col,Stroke_Start_Row);
+     Ctx_Out.lineTo(MouseTouch_Move_Col,MouseTouch_Move_Row);
+     Ctx_Out.stroke();
+			
+     Stroke_Start_Col=MouseTouch_Move_Col;
+     Stroke_Start_Row=MouseTouch_Move_Row;
+    }
+   }
+
+   function MouseUp(Ev)
+   {
+        {
+     MouseTouchEnd();
+     MouseDown_Status=false;
+     MouseMoved_Status=false;
+    }
+   }
+
+   function MouseOut(Ev)
+   {
+    if  ( (UserMode==1) && (ViewModeOpt==1) && (Anim_Play==true) )
+    {
+     RotateView();
+    }
+   }
+
+   function TouchEnd(Ev)
+   {
+    var Touch1EndTime;
+    Ev.stopPropagation(); Ev.preventDefault();
+    if ( (Ev.touches.length==0) && (Touch1_Status==true) )
+    {
+     	    Touch1Moved_Status=false;
+          MouseTouchEnd();
+    }
+   
+    if ( (Ev.touches.length<=2) && (Touch2_Status==true) )
+    {
+         }
+    
+    Touch1_Status=false; Touch1Moved_Status=false;
+    Touch2_Status=false; Touch2Moved_Status=false;
+   }
+	
+   function MouseTouchEnd(Ev)
+   {
+        {
+     if ( (UserMode==1) && (ViewModeOpt==1) && ((MouseMoved_Status==true) || (Touch1Moved_Status==true)) )
+     {
+      document.getElementById('Rotate_Id').style.border='3px solid red';
+      Rot_Ang=0; Anim_Play=false;
+      RotMode=4;	
+      document.getElementById('Rotate_Id').src='Images/Buttons/Rightward.png'; 
+     }
+     if ( (UserMode==1) && (ViewModeOpt==2) )
+     {
+      document.getElementById('Displace_Id').style.border='3px solid red';
+      document.getElementById('Output').style.cursor='pointer';
+     }
+    } 
+    if (UserMode==2) document.getElementById('FreeDraw_Id').style.border = '3px solid red';
+	
+	   if ( (UserMode==1) && ((MouseMoved_Status==false) && (Touch1Moved_Status==false)) )
+    {
+     if (ViewModeOpt==1)
+     {
+      Rot_Ang=Rot_Ang_Tmp;
+      if (MouseTouch_OnObject==true)
+      {
+       document.getElementById('Output').style.cursor='crosshair';
+       if ( (Anim_Play_Temp==false) && (RotMode>2))
+       {
+        RotMode=1;
+       }
+       else
+       {
+        if ((Anim_Play_Temp==true) && (RotMode!=1) ) RotMode=1;
+        else { if ((Anim_Play_Temp==true) && (RotMode==1) ) RotMode=2; }
+       }
+      }
+      else
+      {
+       if ( Math.abs(MouseTouch_Start_Hor/Mag-Shft_Net_y)>Math.abs(MouseTouch_Start_Ver/Mag-Shft_Net_z) )
+       {
+        document.getElementById('Output').style.cursor='e-resize';
+        if (MouseTouch_Start_Hor/Mag>Shft_Net_y) RotMode=4; else RotMode=3;
+       }
+       else
+       {
+        document.getElementById('Output').style.cursor='n-resize';
+        if (MouseTouch_Start_Ver/Mag>Shft_Net_z) RotMode=5; else RotMode=6;
+       }
+      }
+				
+      if (Anim_Play_Temp==true) Anim_Play=true; else Anim_Play=false;
+      RotateView();
+     }
+     if (ViewModeOpt==2)
+     { 
+      Anim_Play=false;
+      if (MouseTouch_OnObject==true)
+      {
+       if (DispMode<5) DispMode=5;
+       if (View_Dist<=2) DispMode=6;
+       if (View_Dist>=100) DispMode=5;
+       if (DispMode==5)
+       {
+        document.getElementById('Output').style.cursor='zoom-in';
+        ViewScrollCloser=true;
+       }
+       else 
+       {
+        document.getElementById('Output').style.cursor='zoom-out';
+        ViewScrollCloser=false;
+       }
+       Zoom_Pt_Col=MouseTouch_Start_Col;
+       Zoom_Pt_Row=MouseTouch_Start_Row;
+       ScaleZoomInOut();
+      }
+      else
+      {
+       if ( Math.abs(MouseTouch_Start_Hor/Mag-Shft_Net_y)>Math.abs(MouseTouch_Start_Ver/Mag-Shft_Net_z) )
+       {
+        document.getElementById('Output').style.cursor='e-resize';
+        if (MouseTouch_Start_Hor/Mag>Shft_Net_y) DispMode=1; else DispMode=2;
+       }
+       else
+       {
+        document.getElementById('Output').style.cursor='n-resize';
+        if (MouseTouch_Start_Ver/Mag>Shft_Net_z) DispMode=3; else DispMode=4;
+       }
+      }
+						
+      if ( (DispMode!=5) && (DispMode!=6) ) DisplaceView();
+     }
+    }
+   }
+	
+   function DoubleClickFunction(Ev)
+   {
+    if ((UserMode==1) && (ViewModeOpt==1))
+    {
+     Qp0=1.0; Qp1=0.0001; Qp2=0.0001; Qp3=0.0001;
+     Rot_Ang=0; Mag=1.0;
+     document.getElementById('Rotate_Id').style.border = '3px solid red'; Anim_Play=false;
+     OutputImage();
+    }
+    if ((UserMode==1) && (ViewModeOpt==2))
+    {
+     Shft_Net_y=0; Shft_Net_z=0; View_Dist=100;
+     OutputImage();			
+    }
+   }
+   
+   function Scroll(Ev)
+   {
+    Ev.preventDefault(); Ev.stopPropagation();
+    Zoom_Pt_Col=Math.round(Ev.clientX-Can_Out.getBoundingClientRect().left);
+    Zoom_Pt_Row=Math.round(Ev.clientY-Can_Out.getBoundingClientRect().top);
+    if (UserMode==1)
+    {
+     if (ViewModeOpt==1)
+     {
+      if (Ev.deltaY>0) Mag_Mul=0.9;
+      else Mag_Mul=1.1;
+     }
+     if (ViewModeOpt==2)
+     {
+      if (Ev.deltaY>0) ViewScrollCloser=false; else ViewScrollCloser=true;
+     }
+     ScaleZoomInOut();
+    }
+   }
+	
+   function ScaleZoomInOut()
+   {
+       var Zoom_Pt_y; var Zoom_Pt_z;
+    var View_Dist_Tmp;
+    var Fact1; var Fact2;
+   
+    Anim_Play=false;
+    
+    Zoom_Pt_y=Zoom_Pt_Col-0.5*Out_Img_Width+0.5;
+    Zoom_Pt_z=-(Zoom_Pt_Row-0.5*Out_Img_Height+0.5);
+    document.getElementById('3DView_Initial_Position_Id').style.border = '3px solid white';
+    if (ViewModeOpt==1) document.getElementById('Rotate_Id').style.border = '3px solid red';
+    if (ViewModeOpt==2) document.getElementById('Displace_Id').style.border = '3px solid red';
+    
+    if (ViewModeOpt==1)
+    {
+     if (Mag_Mul>1)  document.getElementById('Rotate_Id').src='Images/Buttons/LockEnlarge.png';
+      else  document.getElementById('Rotate_Id').src='Images/Buttons/LockShrink.png';
+     if (Reso_Dist_Min[Out_Img_Width*Zoom_Pt_Row+Zoom_Pt_Col]>-15000.0)
+     {      
+      if (Mag_Mul>1) document.getElementById('Output').style.cursor='zoom-in';
+      else document.getElementById('Output').style.cursor='zoom-out';
+      if ( (Mag*Mag_Mul>0.25) && (Mag*Mag_Mul<4) )
+      {
+       Fact1=(View_Dist-(Reso_Dist_Min[Out_Img_Width*Zoom_Pt_Row+Zoom_Pt_Col]/Enc_Cir_Rad))/(View_Dist*Mag);
+       Shft_Net_y+=Zoom_Pt_y*Fact1*((1.0/Mag_Mul)-1);
+       Shft_Net_z+=Zoom_Pt_z*Fact1*((1.0/Mag_Mul)-1);
+       Mag=Mag*Mag_Mul;
+      }
+      else document.getElementById('Output').style.cursor='not-allowed';  
+     }
+     else document.getElementById('Output').style.cursor='not-allowed';
+    }
+    
+    if (ViewModeOpt==2)
+    {
+     if (ViewScrollCloser) document.getElementById('Displace_Id').src='Images/Buttons/Closer.png';
+     else document.getElementById('Displace_Id').src='Images/Buttons/Farther.png';
+    
+     if (Reso_Dist_Min[Out_Img_Width*Zoom_Pt_Row+Zoom_Pt_Col]>-15000.0)
+     { 
+      Fact1=Reso_Dist_Min[Out_Img_Width*Zoom_Pt_Row+Zoom_Pt_Col]/(Enc_Cir_Rad*Mag);
+      if (ViewScrollCloser) 
+      {
+       document.getElementById('Output').style.cursor='zoom-in';
+       if (View_Dist>2)
+       { 
+        if (View_Dist==100)
+        {
+         Shft_Net_y+=Zoom_Pt_y*Fact1*(0.01-0.1);
+         Shft_Net_z+=Zoom_Pt_z*Fact1*(0.01-0.1);
+         View_Dist=10; 
+        }
+        else
+        {
+         Shft_Net_y+=Zoom_Pt_y*Fact1*((1/View_Dist)-(1/(View_Dist-1)));
+         Shft_Net_z+=Zoom_Pt_z*Fact1*((1/View_Dist)-(1/(View_Dist-1)));
+         View_Dist-=1;
+        }
+       }
+       else document.getElementById('Output').style.cursor='not-allowed';
+      }
+      else
+      {
+       document.getElementById('Output').style.cursor='zoom-out';
+       if (View_Dist<100)
+       {
+        if (View_Dist==10)
+        {
+         Shft_Net_y+=Zoom_Pt_y*Fact1*(0.1-0.01);
+         Shft_Net_z+=Zoom_Pt_z*Fact1*(0.1-0.01);
+         View_Dist=100; 
+        }
+        else
+        {
+         Shft_Net_y+=Zoom_Pt_y*Fact1*((1/View_Dist)-(1/(View_Dist+1)));
+         Shft_Net_z+=Zoom_Pt_z*Fact1*((1/View_Dist)-(1/(View_Dist+1)));
+         View_Dist+=1;
+        }
+       }
+       else document.getElementById('Output').style.cursor='not-allowed';
+      }
+     }
+     else document.getElementById('Output').style.cursor='not-allowed';
+    }      
+    OutputImage();
+   }
+	
+   function KeyDown(Ev)
+   {
+    if ((Ev.keyCode==16) && (UserMode==1) && (MouseDown_Status!=true)) DisplaceView();		
+   }	  
+			
+   function FullScreen()
+   {
+    if (FullScreenOn==false)
+    {
+     if (FullScrElem.requestFullscreen) FullScrElem.requestFullscreen();
+     else if (FullScrElem.mozRequestFullScreen) FullScrElem.mozRequestFullScreen();
+     else if (FullScrElem.webkitRequestFullscreen) FullScrElem.webkitRequestFullscreen();
+     else if (FullScrElem.msRequestFullscreen) FullScrElem.msRequestFullscreen();
+     FullScreenOn=true;
+     document.getElementById('FullScreen_Id').src='Images/Buttons/ExitScreen.png';
+     document.getElementById('FullScreen_Id').title='Exit Full Screen';
+    }
+    else
+    {
+     if (document.exitFullscreen) document.exitFullscreen();
+     else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+     else if (document.msExitFullscreen) document.msExitFullscreen();
+     FullScreenOn=false;
+     document.getElementById('FullScreen_Id').src='Images/Buttons/FullScreen.png';
+     document.getElementById('FullScreen_Id').title='Full Screen';
+    }    
+   }
+   if (performance.navigation.type == 1)
+   {
+    document.getElementById('Obj_Id').value=1;
+    document.getElementById('Language_Id').value='ENG';
+   }
+  </script>
+ </body>
+</html>
+
+ 
+ 

@@ -1,0 +1,4 @@
+RewriteEngine On 
+RewriteCond %{SERVER_PORT} 80
+RewriteCond %{HTTP_HOST} ^(www\.)?spherulersolutions\.com
+RewriteRule ^(.*)$ https://www.spherulersolutions.com/$1 [R,L]
