@@ -1,0 +1,14 @@
+# Local / server files
+Unlinked/
+
+# Logs
+*.log
+error_log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
