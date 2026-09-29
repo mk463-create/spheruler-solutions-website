@@ -16,16 +16,36 @@ body {
     pointer-events: none;
 }
 
-< !--html,
+.sphere-hero {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    min-height: 500px;
+    padding-top: 80px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#earth {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+/* html,
 body {
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
-}
+} */
 
--->p {
+p {
     font-size: 22px;
 }
 
